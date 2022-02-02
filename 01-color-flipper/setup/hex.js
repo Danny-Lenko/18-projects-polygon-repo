@@ -20,14 +20,13 @@ let controller = {
    hex: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"],
 
    manageHeroBtnClicks() {
-      let hexValues = ['#'];
+      let hexValues = '#'
 
       for (let i = 0; i < 6; i++) {
-         hexValues.push(controller.hex[Math.floor(Math.random() * 15)])
+         hexValues += controller.hex[Math.floor(Math.random() * 15)];
       }
-      hexValues = hexValues.join('');
       view.setBackground(hexValues);
       view.setColorName(hexValues);
    }
-   
+
 };

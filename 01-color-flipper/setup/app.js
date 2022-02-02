@@ -18,7 +18,7 @@ let controller = {
    colors: ["green", "red", "rgba(133,122,200)", "#f15025"],
 
    manageHeroBtnClicks() {
-      const color = controller.colors[Math.floor(Math.random() * 4)];
+      const color = controller.colors[Math.floor(Math.random() * controller.colors.length)];
       view.setBackground(color);
       view.setColorName(color);
    }
