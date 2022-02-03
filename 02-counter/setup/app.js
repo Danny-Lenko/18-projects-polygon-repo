@@ -2,28 +2,24 @@
 
 let counter = 0;
 
-document.querySelector('.increase').addEventListener('click', () => {
-   counter++;
-   updateOutput();
-});
+document.querySelectorAll('.btn').forEach(btn => {
+   btn.addEventListener('click', (e) => {
+      const classList = e.target.classList;
+      const valueField = document.querySelector('#value');
+      const myCounters = document.querySelector('#myCounters');
 
-document.querySelector('.decrease').addEventListener('click', () => {
-   counter--;
-   updateOutput();
+
+      counter = (classList.contains('increase')) ? counter + 1 :
+         (classList.contains('decrease')) ? counter - 1 :
+         (classList.contains('reset')) ? 0 : 
+         counter;
+
+      if (classList.contains('saveBtn')) {
+         myCounters.innerHTML += (!myCounters.innerHTML) ? counter : ', ' + counter;
+      }
+
+      valueField.innerHTML = counter;
+      valueField.style.color = (counter > 0) ? 'green' : (counter < 0) ? 'red' : 'inherit';
+
+     })
 })
-
-document.querySelector('.reset').addEventListener('click', () => {
-   counter = 0;
-   updateOutput();
-})
-
-document.querySelector('.saveBtn').addEventListener('click', () => {
-   const myCounters = document.querySelector('#myCounters');
-   myCounters.innerHTML += (!myCounters.innerHTML) ? counter : ', ' + counter;
-})
-
-const updateOutput = () => {
-   const valueField = document.querySelector('#value')
-   valueField.innerHTML = counter;
-   valueField.style.color = (counter > 0) ? 'green' : (counter < 0) ? 'red' : 'inherit';
-}

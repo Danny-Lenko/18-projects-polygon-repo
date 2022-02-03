@@ -27,17 +27,17 @@
 
 ### What I learned
 
-1) the Utility Classes "gap" property to use between flex and grid elements (html customizable variable)
+## 02 - Counter
 
-```css
-.flex {
-   display: flex;
-   gap: var(--gap, 1.6rem);
-}
-.grid {
-   display: grid;
-   gap: var(--gap, 1.6rem);
-}
+1) An ability to save a classList in a variable;
+
+```js
+document.querySelectorAll('.btn').forEach(btn => {
+   btn.addEventListener('click', (e) => {
+      const classList = e.target.classList;
+      console.log(classList);
+   })
+})
 ```
 
 ### Continued development
