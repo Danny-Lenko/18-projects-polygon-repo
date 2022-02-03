@@ -1,6 +1,5 @@
 "use strict"
 
-
 const toggleSideBar = () => {
    const sideBar = document.querySelector('.sidebar');
    sideBar.classList.toggle('show-sidebar');
