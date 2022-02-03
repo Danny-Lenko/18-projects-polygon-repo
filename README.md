@@ -50,7 +50,27 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 ```
 
+## 04 - Navbar
 
+1) basic setup for mobile burger button
+
+```css
+.links {
+  height: 0;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.show-links {
+  height: 10rem;
+}
+```
+
+```js
+document.querySelector('.nav-toggle').addEventListener('click', () => {
+   const links = document.querySelector('.links');
+   links.classList.toggle('show-links');
+})
+```
 
 
 
