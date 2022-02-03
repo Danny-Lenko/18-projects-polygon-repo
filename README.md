@@ -29,7 +29,7 @@
 
 ## 02 - Counter
 
-1) An ability to save a classList in a variable;
+1) An ability to save a classList in a variable
 
 ```js
 document.querySelectorAll('.btn').forEach(btn => {
@@ -39,6 +39,21 @@ document.querySelectorAll('.btn').forEach(btn => {
    })
 })
 ```
+
+## 03 - Reviews
+
+1) Load initial item
+
+```js
+window.addEventListener("DOMContentLoaded", function () {
+   // yada yada
+});
+
+```
+
+
+
+
 
 ### Continued development
 
