@@ -1,5 +1,5 @@
 // local reviews data
-const reviews = [
+export const reviews = [
   {
     id: 1,
     name: "susan smith",
