@@ -52,7 +52,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
 ## 04 - Navbar
 
-1) basic setup for mobile burger button
+1) basic setup for mobile navbar
 
 ```css
 .links {
@@ -62,6 +62,15 @@ window.addEventListener("DOMContentLoaded", function () {
 }
 .show-links {
   height: 10rem;
+}
+/* ! Important thing here is to use "height: auto" for bigger sreen */
+@media screen and (min-width: 800px) {
+
+  .links {
+    height: auto;
+    display: flex;
+  }
+
 }
 ```
 
