@@ -72,3 +72,60 @@ const menu = [
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
 ];
+
+const dinner = {
+  id: 10,
+  title: "steak dinner",
+  category: "dinner",
+  price: 39.99,
+  img: "./images/item-10.jpeg",
+  desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+};
+menu.push(dinner);
+
+const mainSection = document.querySelector('.section-center');
+const filterBtns = document.querySelectorAll('.filter-btn');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+
+    const identifier = e.currentTarget.getAttribute(['data-id']);
+    let menuToShow = menu.filter((item) => identifier === item.category);
+
+    if (identifier === 'all') {
+      menuToShow = [...menu];
+    }
+
+    mainSection.innerHTML = '';
+    renderFilteredMenu(menuToShow);
+  })
+})
+
+const renderFilteredMenu = (menu) => {
+
+  menu.forEach(item => {
+  const menuItem = document.createElement('article');
+
+  menuItem.innerHTML = `
+    <img src=${item.img} class="photo" alt="">
+    <div class="item-info">
+      <header>
+        <h4>${item.title}</h4>
+        <h4 class="price">$${item.price}</h4>
+      </header>
+      <p class="item-text">
+        ${item.desc}
+      </p>
+    </div>
+  `;
+
+  menuItem.classList.add('menu-item');
+  mainSection.appendChild(menuItem);
+  })
+
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  mainSection.innerHTML = '';
+  renderFilteredMenu(menu);
+});
