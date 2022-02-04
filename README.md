@@ -81,6 +81,14 @@ document.querySelector('.nav-toggle').addEventListener('click', () => {
 })
 ```
 
+## 08 - menu
+
+1) the way to get the, for example, "data-id" property of a DOM element
+
+```js
+const category = e.currentTarget.dataset.id;
+```
+
 
 
 
