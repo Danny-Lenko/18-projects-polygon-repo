@@ -71,35 +71,53 @@ const menu = [
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 10,
+    title: "steak dinner",
+    category: "dinner",
+    price: 39.99,
+    img: "./images/item-10.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
 ];
 
-const dinner = {
-  id: 10,
-  title: "steak dinner",
-  category: "dinner",
-  price: 39.99,
-  img: "./images/item-10.jpeg",
-  desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
-};
-menu.push(dinner);
-
 const mainSection = document.querySelector('.section-center');
-const filterBtns = document.querySelectorAll('.filter-btn');
 
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-
-    const identifier = e.currentTarget.getAttribute(['data-id']);
-    let menuToShow = menu.filter((item) => identifier === item.category);
-
-    if (identifier === 'all') {
-      menuToShow = [...menu];
+const displayButtons = () => {
+  const btnContainer = document.querySelector('.btn-container');
+  const menuCategories = menu.map((dish) => dish.category);
+  const categoryNames = menuCategories.reduce(function(value, item) {
+    if (!value.includes(item)) {
+      value.push(item);
     }
+    return value;
+  }, ['all']);
 
-    mainSection.innerHTML = '';
-    renderFilteredMenu(menuToShow);
-  })
-})
+  const buttonsCode = categoryNames.map((name) =>
+    `<button type="button" class="filter-btn" data-id="${name}">${name}</button>`
+  ).join('');
+  btnContainer.innerHTML = buttonsCode;
+}
+
+const manageBtnsClicks = () => {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+  
+      const identifier = e.currentTarget.getAttribute(['data-id']);
+      let menuToShow = menu.filter((item) => identifier === item.category);
+  
+      if (identifier === 'all') {
+        menuToShow = [...menu];
+      }
+  
+      mainSection.innerHTML = '';
+      renderFilteredMenu(menuToShow);
+    })
+  })  
+}
+
 
 const renderFilteredMenu = (menu) => {
 
@@ -126,6 +144,8 @@ const renderFilteredMenu = (menu) => {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
+  displayButtons();
   mainSection.innerHTML = '';
   renderFilteredMenu(menu);
+  manageBtnsClicks();
 });
