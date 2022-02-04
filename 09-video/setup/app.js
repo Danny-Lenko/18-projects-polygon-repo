@@ -5,6 +5,8 @@
 window.onload = () => {
    document.querySelector('.preloader').classList.add('hide-preloader');
    document.querySelector('.switch-btn').addEventListener('click', (e) => {
+      let video = document.querySelector('.video-container');
       e.currentTarget.classList.toggle('slide');
+      video = (e.currentTarget.classList.contains('slide')) ? video.pause() : video.play();
    })
 }
