@@ -89,6 +89,15 @@ document.querySelector('.nav-toggle').addEventListener('click', () => {
 const category = e.currentTarget.dataset.id;
 ```
 
+## 10 - scroll
+
+1) How I get the current year
+
+```js
+const date = document.querySelector('#date');
+date.innerHTML = new Date().getFullYear();
+```
+
 
 
 

@@ -6,9 +6,7 @@
 // ********** set date ************
 
 const date = document.querySelector('#date');
-const n = new Date();
-const y = n.getFullYear();
-date.innerHTML = y;
+date.innerHTML = new Date().getFullYear();
 
 // ********** close links ************
 
