@@ -101,7 +101,7 @@ const category = e.currentTarget.dataset.id;
 
 ### Useful resources
 
-- [Grid Attack](https://codingfantasy.com) - This helped me practice CSS GRID. Challenging and interactive game aimed at learning the css grid properties' application.
+- [pageYOffSet](https://stackoverflow.com/a/28144651/16906724) - The answer helped me track the scroll event.
 
 - [Git + GitHub](https://www.youtube.com/watch?v=RGOj5yH7evk) - the basic git commands (Youtube).
 - [The Markdown Guide](https://www.markdownguide.org/) - for more help with writing markdown (Article).

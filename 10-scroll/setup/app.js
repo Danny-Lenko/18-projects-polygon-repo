@@ -7,7 +7,20 @@
 
 // ********** close links ************
 
+document.querySelector('.nav-toggle').addEventListener('click', () => {
+   document.querySelector('.links-container').classList.toggle('show-links');
+})
+
 // ********** fixed navbar ************
 
 // ********** smooth scroll ************
 // select links
+
+// function see() {
+//    console.log(window.pageYOffset);
+// }
+// window.addEventListener('scroll', see);
+
+const nav = document.querySelector('#nav');
+const rect = nav.getBoundingClientRect();
+console.log(rect);
