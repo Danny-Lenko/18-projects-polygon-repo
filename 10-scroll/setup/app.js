@@ -5,6 +5,11 @@
 
 // ********** set date ************
 
+const date = document.querySelector('#date');
+const n = new Date();
+const y = n.getFullYear();
+date.innerHTML = y;
+
 // ********** close links ************
 
 document.querySelector('.nav-toggle').addEventListener('click', () => {
@@ -13,14 +18,28 @@ document.querySelector('.nav-toggle').addEventListener('click', () => {
 
 // ********** fixed navbar ************
 
+function fixAndUnfixNavbar() {
+   const navEl = document.querySelector('#nav');
+   if (window.pageYOffset > 50) {
+      navEl.classList.add('fixed-nav');
+   } else if (window.pageYOffset < 50) {
+      navEl.classList.remove('fixed-nav');
+   }
+}
+window.addEventListener('scroll', fixAndUnfixNavbar);
+
 // ********** smooth scroll ************
+
+
 // select links
 
-// function see() {
-//    console.log(window.pageYOffset);
-// }
-// window.addEventListener('scroll', see);
+function enableAndDisableArrow() {
+   const topLink = document.querySelector('.top-link');
+   if (window.pageYOffset > 550) {
+      topLink.classList.add('show-link');
+   } else if (window.pageYOffset < 550) {
+      topLink.classList.remove('show-link');
+   }
+}
 
-const nav = document.querySelector('#nav');
-const rect = nav.getBoundingClientRect();
-console.log(rect);
+window.addEventListener('scroll', enableAndDisableArrow);
