@@ -98,7 +98,26 @@ const date = document.querySelector('#date');
 date.innerHTML = new Date().getFullYear();
 ```
 
+2) how to render links dynamically on click event
+!! make notice element.style.height must be a string type!
 
+```js
+const linksContainer = document.querySelector('.links-container');
+const links = document.querySelector('.links');
+
+document.querySelector('.nav-toggle').addEventListener('click', () => {
+   const linksContainerHeight = linksContainer.getBoundingClientRect().height;
+   const linksHeight = links.getBoundingClientRect().height;
+
+   console.log('hello')
+   if (linksContainerHeight === 0) {
+      linksContainer.style.height = `${linksHeight}px`;
+   } else {
+      linksContainer.style.height = 0;
+   }
+})
+
+```
 
 
 
