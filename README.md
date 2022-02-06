@@ -99,7 +99,8 @@ date.innerHTML = new Date().getFullYear();
 ```
 
 2) how to render links dynamically on click event
-!! make notice element.style.height must be a string type!
+!! make notice element.style.height must be a string type !!
+!! and also there will be a need to specify the 'height: auto;' property of the links-container in a widescreen mode with the !important !!
 
 ```js
 const linksContainer = document.querySelector('.links-container');

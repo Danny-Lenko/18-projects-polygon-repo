@@ -3,6 +3,9 @@
 // slice extracts a section of a string without modifying original string
 //offsetTop - A Number, representing the top position of the element, in pixels
 
+
+const linksContainer = document.querySelector('.links-container');
+
 // ********** set date ************
 
 const date = document.querySelector('#date');
@@ -10,14 +13,12 @@ date.innerHTML = new Date().getFullYear();
 
 // ********** close links ************
 
-const linksContainer = document.querySelector('.links-container');
-const links = document.querySelector('.links');
 
 document.querySelector('.nav-toggle').addEventListener('click', () => {
+   const links = document.querySelector('.links');
    const linksContainerHeight = linksContainer.getBoundingClientRect().height;
    const linksHeight = links.getBoundingClientRect().height;
 
-   console.log('hello')
    if (linksContainerHeight === 0) {
       linksContainer.style.height = `${linksHeight}px`;
    } else {
@@ -25,7 +26,7 @@ document.querySelector('.nav-toggle').addEventListener('click', () => {
    }
 })
 
-// ********** fixed navbar ************
+// ********** fixed navbar & arrow anchor ************
 
 function fixAndUnfixNavbar() {
    const navEl = document.querySelector('#nav');
@@ -37,11 +38,6 @@ function fixAndUnfixNavbar() {
 }
 window.addEventListener('scroll', fixAndUnfixNavbar);
 
-// ********** smooth scroll ************
-
-
-// select links
-
 function enableAndDisableArrow() {
    const topLink = document.querySelector('.top-link');
    if (window.pageYOffset > 550) {
@@ -50,5 +46,37 @@ function enableAndDisableArrow() {
       topLink.classList.remove('show-link');
    }
 }
-
 window.addEventListener('scroll', enableAndDisableArrow);
+
+
+// ********** smooth scroll ************
+document.querySelectorAll('.scroll-link').forEach( link => {
+   link.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const name = e.currentTarget.getAttribute("href").slice(1);
+      const section = document.getElementById(name);
+      const sectionPosition = section.offsetTop;
+      const navbar = document.querySelector('#nav');
+      const navbarHeight = navbar.getBoundingClientRect().height;
+      const linksContainerHeight = linksContainer.getBoundingClientRect().height;
+      let position = sectionPosition - navbarHeight;
+
+      if (!navbar.classList.contains('fixed-nav')) {
+         position = position - navbarHeight;
+      }
+      if (navbarHeight > 100) {
+         position += linksContainerHeight;
+      }
+
+      window.scrollTo({
+         left: 0,
+         top: position
+      })
+
+      linksContainer.style.height = 0;
+   })
+})
+
+// select links
+
