@@ -128,7 +128,11 @@ document.querySelector('.nav-toggle').addEventListener('click', () => {
    })
 ```
 
-4) 
+4) the way to get the top position of an element
+
+```js
+   const sectionPosition = section.offsetTop;
+```
 
 
 
