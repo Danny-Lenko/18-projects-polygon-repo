@@ -117,8 +117,18 @@ document.querySelector('.nav-toggle').addEventListener('click', () => {
       linksContainer.style.height = 0;
    }
 })
-
 ```
+
+3) the way to scroll down and up to some position
+
+```js
+   window.scrollTo({
+      left: 0,
+      top: position
+   })
+```
+
+4) 
 
 
 
