@@ -11,13 +11,10 @@ tabBtns.forEach( btn => {
       })
       btn.classList.add('active');
 
-      contentBoxes.forEach(box => {
-         if (box.classList.contains('active')) {
-            box.classList.remove('active');
-         }
-         if (btnName === box.id) {
-            box.classList.add('active');
-         }
+      contentBoxes.forEach( box => {
+         const exactBox = document.getElementById(btnName);
+         box.classList.remove('active');
+         exactBox.classList.add('active');
       })
    })
 })
