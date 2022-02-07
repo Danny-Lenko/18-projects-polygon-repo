@@ -147,6 +147,7 @@ document.querySelector('.nav-toggle').addEventListener('click', () => {
 - [pageYOffSet](https://stackoverflow.com/a/28144651/16906724) - The answer helped me track the scroll event.
 - [month-days-number](https://stackoverflow.com/a/1184359/16906724) - how to find the number of days in a month.
 - [countdown-timer](https://www.educative.io/edpresso/how-to-create-a-countdown-timer-using-javascript) - this contains the text format tutorial to build the timer.
+- [prevent-refresh](https://stackoverflow.com/a/22772518/16906724) - how to prevent a page from refreshing after submitting a form.
 
 - [Git + GitHub](https://www.youtube.com/watch?v=RGOj5yH7evk) - the basic git commands (Youtube).
 - [The Markdown Guide](https://www.markdownguide.org/) - for more help with writing markdown (Article).

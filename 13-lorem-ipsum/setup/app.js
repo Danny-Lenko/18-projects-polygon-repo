@@ -35,7 +35,7 @@ document.querySelector('.btn').addEventListener('click', () => {
   }
 
   textToRender.map(item => {
-    textContainer.innerHTML += `<p>${item}</p>`;
+    textContainer.innerHTML += `<p class="result">${item}</p>`;
   })
   document.querySelector('#amount').value = '';
 })
