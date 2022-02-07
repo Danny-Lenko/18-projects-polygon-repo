@@ -74,10 +74,45 @@ const getGiveawayYear = () => {
 const giveAwayDay = getGiveawayDay(todayDayOfMonth, totalDays);
 const giveAwayMonth = getGiveawayMonth();
 const giveAwayYear = getGiveawayYear();
-const giveAwayDate = new Date(`${giveAwayMonth} ${giveAwayDay}, ${giveAwayYear}`);
+const giveAwayDate = new Date(`${giveAwayMonth} ${giveAwayDay}, ${giveAwayYear} 11:30:00`);
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-let dateString = giveAwayDate.toLocaleDateString('en-EN', options);
-dateString = dateString.split(', ').join(' ').split(' ');
 
+let dateInfo = giveAwayDate.toLocaleDateString('en-EN', options);
+dateInfo = dateInfo.split(', ').join(' ').split(' ');
 
-console.log(dateString);
+document.querySelector('.giveaway').innerHTML = `
+  giveaway ends on ${dateInfo[0]}, ${dateInfo[2]} ${dateInfo[1]} ${dateInfo[3]}, 11:30am
+`
+
+/* end of giveaway setting functionality */
+
+/* ----------
+  set the countdown timer
+------------ */
+
+const timeToCountDown = giveAwayDate.getTime();
+function countDownTime() {
+  const now = new Date().getTime();
+  const timeleft = timeToCountDown - now;
+
+  const days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
+  document.querySelector(".days").innerHTML = days;
+  document.querySelector(".hours").innerHTML = hours;
+  if (hours < 10) {
+    document.querySelector(".hours").innerHTML = `0${hours}`;
+  } 
+  document.querySelector(".minutes").innerHTML = minutes;
+  if (minutes < 10) {
+    document.querySelector(".minutes").innerHTML = `0${minutes}`;
+  }
+  document.querySelector(".seconds").innerHTML = seconds;
+  if (seconds < 10) {
+    document.querySelector(".seconds").innerHTML = `0${seconds}`;
+  }
+}
+let intervalID = setInterval(countDownTime, 1000);
+
