@@ -145,6 +145,7 @@ document.querySelector('.nav-toggle').addEventListener('click', () => {
 ### Useful resources
 
 - [pageYOffSet](https://stackoverflow.com/a/28144651/16906724) - The answer helped me track the scroll event.
+- [month-days-number](https://stackoverflow.com/a/1184359/16906724) - how to find the number of days in a month.
 
 - [Git + GitHub](https://www.youtube.com/watch?v=RGOj5yH7evk) - the basic git commands (Youtube).
 - [The Markdown Guide](https://www.markdownguide.org/) - for more help with writing markdown (Article).
