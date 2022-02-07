@@ -49,16 +49,35 @@ const getGiveawayDay = (today, days) => {
 Functionality to set giveaway date;
 -------------- */ 
 
-const giveDayOfMonth = getGiveawayDay(todayDayOfMonth, totalDays);
-
 let giveWeekday = 'Monday';
-let giveMonth = 'January';
 let giveDate = 1;
 let giveYear = 2022;
 
-let giveawayFullDate = new Date ()
+const getGiveawayMonth = () => {
+let giveMonth = todayMonth;
+  if (nextMonth) {
+    giveMonth = todayMonth + 1;
+    if (giveMonth > 11) {
+      giveMonth = 0;
+    }
+  }
+  return months[giveMonth];
+}
 
-// const getGiveawayFullDate = () => {
-//   if 
-// }
+const getGiveawayYear = () => {
+  let giveYear = todayYear;
+  if (nextYear) {
+    giveYear = todayYear + 1;
+  }
+  return giveYear;
+}
+const giveAwayDay = getGiveawayDay(todayDayOfMonth, totalDays);
+const giveAwayMonth = getGiveawayMonth();
+const giveAwayYear = getGiveawayYear();
+const giveAwayDate = new Date(`${giveAwayMonth} ${giveAwayDay}, ${giveAwayYear}`);
+const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+let dateString = giveAwayDate.toLocaleDateString('en-EN', options);
+dateString = dateString.split(', ').join(' ').split(' ');
 
+
+console.log(dateString);
