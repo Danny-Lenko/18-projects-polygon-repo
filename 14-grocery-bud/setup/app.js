@@ -2,8 +2,8 @@
    const groceryContainer = document.querySelector('.grocery-container');
    const alertEl = document.querySelector('.alert');
    const clearBtn = document.querySelector('.clear-btn');
-   
-   
+   const groceryList = document.querySelector('.grocery-list');
+
    let wishList = [];
    let timeoutID;
 // edit option
@@ -16,9 +16,10 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
    } else {
       manageAlertMessage(`Item Added To The List`, `alert-success`);
       wishList.push(userInput);
-      displayItems();
+      // displayItems();
    }
-
+   displayItems();
+   document.querySelector('#grocery').value = '';   
 })
 
 clearBtn.addEventListener('click', () => {
@@ -29,6 +30,41 @@ clearBtn.addEventListener('click', () => {
    }, 500);
    manageAlertMessage(`Empty List`, `alert-danger`);
 })
+
+groceryList.addEventListener('click', (e) => {
+   const neededText = e.target.parentElement
+      .parentElement
+      .parentElement
+      .querySelector('.title')
+      .innerHTML;
+
+   if (e.target.classList.contains('fa-trash')) {
+      manageDelete(neededText);
+      console.log('del');
+   } else if (e.target.classList.contains('fa-edit')) {
+      console.log('edit');
+   } else {
+      console.log(e.target)
+   }
+
+   console.log(neededText);
+   console.log(wishList);
+})
+
+
+
+   // .forEach((item, index) => {
+   //    const delBtn = item.querySelector('.delete-btn');
+   
+   //    delBtn.addEventListener('click', () => {
+   //       wishList.splice(index, 1);
+   //       // displayItems();
+   //       return true;
+   //       console.log(index);
+   //    })
+      
+   // });
+
 
 // ****** FUNCTIONS **********
 
@@ -45,7 +81,7 @@ const manageAlertMessage = (msg, elClass) => {
 }
 
 function displayItems() {
-   const groceryList = document.querySelector('.grocery-list');
+   // const groceryList = document.querySelector('.grocery-list');
    const listItems = wishList.map(item => `
       <article class="grocery-item">
          <p class="title">${item}</p>
@@ -64,6 +100,12 @@ function displayItems() {
       groceryContainer.classList.add('show-container');
    }
    clearBtn.style.visibility = "visible";
+}
+
+const manageDelete = (key) => {
+   const index = wishList.indexOf(key);
+   wishList.splice(index, 1);
+   displayItems();
 }
 
 
