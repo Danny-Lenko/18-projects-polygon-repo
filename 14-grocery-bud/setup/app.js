@@ -3,13 +3,16 @@
    const alertEl = document.querySelector('.alert');
    const clearBtn = document.querySelector('.clear-btn');
    const groceryList = document.querySelector('.grocery-list');
+   const submitBtn = document.querySelector('.submit-btn');
+   const edBtn = document.querySelector('.ed-btn');
 
    let wishList = [];
    let timeoutID;
+   let editIndex;
 // edit option
 
 // ****** EVENT LISTENERS **********
-document.querySelector('.submit-btn').addEventListener('click', () => {
+submitBtn.addEventListener('click', () => {
    const userInput = document.querySelector('#grocery').value;
    if (!userInput) {
       manageAlertMessage(`Please Enter Value`, `alert-danger`);
@@ -19,15 +22,19 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
       // displayItems();
    }
    displayItems();
-   document.querySelector('#grocery').value = '';   
+   document.querySelector('#grocery').value = '';
+
+   localStorage.setItem('wishList', JSON.stringify(wishList));
 })
 
 clearBtn.addEventListener('click', () => {
-   wishList = [];
+   wishList = [];   
+   localStorage.clear();
    displayItems();
+   localStorage.setItem('wishList', JSON.stringify(wishList));
    timeoutID = setTimeout(() => {
       clearBtn.style.visibility = "hidden";
-   }, 500);
+   }, 200);
    manageAlertMessage(`Empty List`, `alert-danger`);
 })
 
@@ -40,31 +47,19 @@ groceryList.addEventListener('click', (e) => {
 
    if (e.target.classList.contains('fa-trash')) {
       manageDelete(neededText);
-      console.log('del');
    } else if (e.target.classList.contains('fa-edit')) {
-      console.log('edit');
-   } else {
-      console.log(e.target)
+      manageEdit(neededText);
    }
-
-   console.log(neededText);
-   console.log(wishList);
 })
 
-
-
-   // .forEach((item, index) => {
-   //    const delBtn = item.querySelector('.delete-btn');
-   
-   //    delBtn.addEventListener('click', () => {
-   //       wishList.splice(index, 1);
-   //       // displayItems();
-   //       return true;
-   //       console.log(index);
-   //    })
-      
-   // });
-
+edBtn.addEventListener('click', () => {
+   const userInput = document.querySelector('#grocery').value;
+   wishList[editIndex] = userInput;
+   displayItems();
+   localStorage.setItem('wishList', JSON.stringify(wishList));
+   document.querySelector('#grocery').value = '';
+   manageAlertMessage(`Value Changed`, `alert-success`);
+})
 
 // ****** FUNCTIONS **********
 
@@ -81,7 +76,6 @@ const manageAlertMessage = (msg, elClass) => {
 }
 
 function displayItems() {
-   // const groceryList = document.querySelector('.grocery-list');
    const listItems = wishList.map(item => `
       <article class="grocery-item">
          <p class="title">${item}</p>
@@ -96,21 +90,39 @@ function displayItems() {
       </article>
    `).join('');
    groceryList.innerHTML = listItems;
-   if (!groceryContainer.classList.contains('show-container')) {
+   if (!groceryContainer.classList.contains('show-container') 
+      && wishList.length > 0) {
       groceryContainer.classList.add('show-container');
    }
-   clearBtn.style.visibility = "visible";
+   if (wishList.length > 0) {
+      clearBtn.style.visibility = "visible";
+   } else if (wishList.length <= 0) {
+      clearBtn.style.visibility = "hidden";
+   }
 }
 
 const manageDelete = (key) => {
    const index = wishList.indexOf(key);
    wishList.splice(index, 1);
    displayItems();
+   localStorage.setItem('wishList', JSON.stringify(wishList));
+   manageAlertMessage(`Item Removed`, `alert-danger`);
 }
 
+const manageEdit = (key) => {
+   editIndex = wishList.indexOf(key);
+   document.querySelector('#grocery').value = key;
+   substitute(edBtn, submitBtn);
+}
 
-
+const substitute = (show, hide) => {
+   hide.style.display = "none";
+   show.style.display = "block";
+}
 
 // ****** LOCAL STORAGE **********
-
+window.onload = function() {
+   wishList = JSON.parse(localStorage.getItem('wishList'));
+   displayItems();
+}
 // ****** SETUP ITEMS **********

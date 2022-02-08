@@ -234,7 +234,8 @@ Grocery List
   font-family: var(--ff-secondary);
   color: var(--clr-grey-5);
 }
-.submit-btn {
+.submit-btn,
+.ed-btn {
   background: var(--clr-primary-8);
   border-color: transparent;
   flex: 0 0 5rem;
@@ -250,9 +251,14 @@ Grocery List
   transition: var(--transition);
   font-size: 0.85rem;
 }
-.submit-btn:hover {
+.submit-btn:hover,
+.ed-btn:hover {
   background: var(--clr-primary-5);
   color: var(--clr-white);
+}
+
+.ed-btn {
+  display: none;
 }
 
 .grocery-container {
