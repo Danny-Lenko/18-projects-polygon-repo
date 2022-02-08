@@ -1,27 +1,33 @@
 // ****** SELECT ITEMS **********
    const groceryContainer = document.querySelector('.grocery-container');
    const alertEl = document.querySelector('.alert');
-   const wishList = [];
-
-
-   let timeoutHide;
+   const clearBtn = document.querySelector('.clear-btn');
+   
+   
+   let wishList = [];
+   let timeoutID;
 // edit option
 
 // ****** EVENT LISTENERS **********
 document.querySelector('.submit-btn').addEventListener('click', () => {
    const userInput = document.querySelector('#grocery').value;
    if (!userInput) {
-      alertEl.innerHTML = "Please Enter Value";
-      alertEl.classList.add('alert-danger');
-      timeoutHide = setTimeout(hideAlert, 1000);
+      manageAlertMessage(`Please Enter Value`, `alert-danger`);
    } else {
-      alertEl.innerHTML = "Item Added To The List";
-      alertEl.classList.add('alert-success');
-      timeoutHide = setTimeout(hideAlert, 1000);
+      manageAlertMessage(`Item Added To The List`, `alert-success`);
       wishList.push(userInput);
       displayItems();
    }
 
+})
+
+clearBtn.addEventListener('click', () => {
+   wishList = [];
+   displayItems();
+   timeoutID = setTimeout(() => {
+      clearBtn.style.visibility = "hidden";
+   }, 500);
+   manageAlertMessage(`Empty List`, `alert-danger`);
 })
 
 // ****** FUNCTIONS **********
@@ -31,6 +37,13 @@ const hideAlert = () => {
    alertEl.classList.remove('alert-success');
    alertEl.innerHTML = "";
 }
+
+const manageAlertMessage = (msg, elClass) => {
+   alertEl.innerHTML = msg;
+   alertEl.classList.add(elClass);
+   timeoutID = setTimeout(hideAlert, 1000);
+}
+
 function displayItems() {
    const groceryList = document.querySelector('.grocery-list');
    const listItems = wishList.map(item => `
@@ -50,6 +63,7 @@ function displayItems() {
    if (!groceryContainer.classList.contains('show-container')) {
       groceryContainer.classList.add('show-container');
    }
+   clearBtn.style.visibility = "visible";
 }
 
 
