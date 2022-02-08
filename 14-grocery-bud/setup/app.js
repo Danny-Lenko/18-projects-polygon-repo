@@ -9,9 +9,9 @@
    let wishList = [];
    let timeoutID;
    let editIndex;
-// edit option
 
 // ****** EVENT LISTENERS **********
+
 submitBtn.addEventListener('click', () => {
    const userInput = document.querySelector('#grocery').value;
    if (!userInput) {
@@ -19,23 +19,20 @@ submitBtn.addEventListener('click', () => {
    } else {
       manageAlertMessage(`Item Added To The List`, `alert-success`);
       wishList.push(userInput);
-      // displayItems();
    }
    displayItems();
    document.querySelector('#grocery').value = '';
-
-   localStorage.setItem('wishList', JSON.stringify(wishList));
 })
 
 clearBtn.addEventListener('click', () => {
    wishList = [];   
    localStorage.clear();
    displayItems();
-   localStorage.setItem('wishList', JSON.stringify(wishList));
    timeoutID = setTimeout(() => {
       clearBtn.style.visibility = "hidden";
    }, 200);
    manageAlertMessage(`Empty List`, `alert-danger`);
+   setDefaults();
 })
 
 groceryList.addEventListener('click', (e) => {
@@ -52,13 +49,14 @@ groceryList.addEventListener('click', (e) => {
    }
 })
 
+// button that submits edition changes
 edBtn.addEventListener('click', () => {
    const userInput = document.querySelector('#grocery').value;
    wishList[editIndex] = userInput;
    displayItems();
-   localStorage.setItem('wishList', JSON.stringify(wishList));
    document.querySelector('#grocery').value = '';
    manageAlertMessage(`Value Changed`, `alert-success`);
+   setDefaults();
 })
 
 // ****** FUNCTIONS **********
@@ -75,7 +73,10 @@ const manageAlertMessage = (msg, elClass) => {
    timeoutID = setTimeout(hideAlert, 1000);
 }
 
+// also updates the local storage content
+// and sets some styling to display items properly 
 function displayItems() {
+
    const listItems = wishList.map(item => `
       <article class="grocery-item">
          <p class="title">${item}</p>
@@ -90,6 +91,9 @@ function displayItems() {
       </article>
    `).join('');
    groceryList.innerHTML = listItems;
+
+   localStorage.setItem('wishList', JSON.stringify(wishList));
+
    if (!groceryContainer.classList.contains('show-container') 
       && wishList.length > 0) {
       groceryContainer.classList.add('show-container');
@@ -99,14 +103,15 @@ function displayItems() {
    } else if (wishList.length <= 0) {
       clearBtn.style.visibility = "hidden";
    }
+//end of displayItems()
 }
 
 const manageDelete = (key) => {
    const index = wishList.indexOf(key);
    wishList.splice(index, 1);
    displayItems();
-   localStorage.setItem('wishList', JSON.stringify(wishList));
    manageAlertMessage(`Item Removed`, `alert-danger`);
+   setDefaults();
 }
 
 const manageEdit = (key) => {
@@ -120,9 +125,13 @@ const substitute = (show, hide) => {
    show.style.display = "block";
 }
 
+const setDefaults = () => {
+   substitute(submitBtn, edBtn);
+   document.querySelector('#grocery').value = '';
+}
+
 // ****** LOCAL STORAGE **********
 window.onload = function() {
    wishList = JSON.parse(localStorage.getItem('wishList'));
    displayItems();
 }
-// ****** SETUP ITEMS **********
